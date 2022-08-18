@@ -115,5 +115,55 @@ Permite conectar nuestro proyecto con babel
 ```bash
 npm run build
 ```
+## HTML Loader
 
+1. Instalar plugin, como dependencia de desarrollo
 
+```bash
+npm install html-webpack-plugin -D
+```
+
+2. Añadir recurso en la parte superior del archivo *webpack.config.js*
+
+```bash
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+```
+
+3. Despues de module en el archivo *webpack.config.js* añadir un plugin al proyecto
+```bash
+  plugins: [
+        new HtmlWebpackPlugin({
+            inject: true,
+            template: './public/index.html',
+            filename: './index.html'
+
+        })
+    ]
+```
+
+4. Hacer cambios en el archivo *index.htlm*, ya que webpack nos entrega el html listo para trabajar.
+
+```bash
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../src/styles/main.css">
+  <title>JS Portfolio</title>
+</head>
+
+<body>
+  <div id="main"></div>
+</body>
+
+</html>
+```
+5. Correr el comando en nuestra terminal 
+```bash
+npm run build
+```
+
+**NOTA:** La carpeta *dist* contiene los archivos *index.html, main.js* minimizados.
