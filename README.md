@@ -167,3 +167,84 @@ npm run build
 ```
 
 **NOTA:** La carpeta *dist* contiene los archivos *index.html, main.js* minimizados.
+
+
+## CSS Loader
+
+1. Instalar plugin css como dependencia de desarrollo
+
+```bash
+npm install mini-css-extract-plugin css-loader -D
+```
+
+2. Quitar *stylesheet* de nuestra cabecera dentro del documento html.
+
+```bash
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Portfolio</title>
+</head>
+
+<body>
+  <div id="main"></div>
+  
+</body>
+
+</html>
+```
+
+3. Añadir estilos en el archivo *index.js*
+
+```bash
+import './styles/main.css'
+```
+
+4. Configurar archivo *webpack.config.js*
+
+* Declarar plugin
+
+```bash
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+```
+* Añadir nuevo module
+
+```bash
+    {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+    }
+```
+
+* Añadir Nuevo plugin
+
+```bash
+    new MiniCssExtractPlugin
+```
+
+5. Correr el comando en nuestra terminal 
+```bash
+npm run build
+```
+
+## Stylus Loader
+
+```bash
+npm install stylus-loader -D
+```
+
+Añadir una regala que reconozca stylus en la regla del modulo css del archivo *webpack.config.js*
+
+```bash
+        {
+            test: /\.css | .styl $/i,
+            use: [MiniCssExtractPlugin.loader, 
+                'css-loader',
+                'stylus-loader'],
+        }
+```
+
