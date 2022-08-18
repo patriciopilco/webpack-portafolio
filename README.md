@@ -61,3 +61,59 @@ npx webpack --mode production --config webpack.config.js
 ```bash
 npm run build
 ``` 
+
+## Babel Loader
+
+Babel permite que la app sea compatible en la mayor parte de navegadores
+
+1. Instalar
+
+* [ preset-env ] nos ayuda a trabajar con javascript moderno.
+* [ plugin-transform-runtime ] plugin para trabajar con asincronismo.
+* [ D ] , se instala como una dependencia de desarrollo.
+
+```bash
+npm install babel-loader @babel/core @babel/preset-env @babel/plugin-transform-runtime -D
+
+```
+**Nota:** Se puede comprobar que las dependencias fueron agregadas, abriendo el archivo *package.json*
+
+2. Crear en la raiz un archivo oculto *.babelrc* , utilizado para añadir configuraciones.
+* Crear un objeto con presets, plugins
+
+```bash
+{
+    "presets": [
+        "@babel/preset-env"
+    ],
+    "plugins": [
+        "@babel/plugin-transform-runtime"
+    ]
+}
+```
+
+3. Crear *module* en el archivo *webpack.config.js*
+
+Permite conectar nuestro proyecto con babel
+
+```bash
+    module: {
+        rules: [
+        {
+            test: /\.m?js$/,  //  Saber que tipo de extensiones vamos a utilizar(Utiliza cualquier extensión con mjs o js)
+            exclude: /node_modules/,
+            use: {
+                loader: 'babel-loader'
+            }
+        }
+        ]
+    }
+```
+
+4. Probar con babel
+
+```bash
+npm run build
+```
+
+
