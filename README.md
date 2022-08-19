@@ -226,10 +226,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
     new MiniCssExtractPlugin
 ```
 
-5. Correr el comando en nuestra terminal 
-```bash
-npm run build
-```
+v
 
 ## Stylus Loader
 
@@ -248,3 +245,60 @@ Añadir una regala que reconozca stylus en la regla del modulo css del archivo *
         }
 ```
 
+## Copia de archivos
+
+1. Instalar plugin *copy-webpack*
+
+```bash
+npm install copy-webpack-plugin -D
+```
+2. Configurar que archivos se van a copiar de src a dist
+
+* Añadir soporte para webpack, se debe configurar el archivo *webpack.config.js*
+
+```bash
+const CopyPlugin = require('copy-webpack-plugin');
+```
+* Crear nueva instancia **CopyPlugin** en la sección plugin, indicando cuales son los elementos que se van a utilizar.
+
+```bash
+    plugins: [
+        new HtmlWebpackPlugin({
+            inject: true,
+            template: './public/index.html',
+            filename: './index.html'
+        }),
+        new MiniCssExtractPlugin(),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, "src", "assets/images"),
+                    to: "assets/images"
+                }
+            ]
+        })
+    ]
+```
+
+* Cambiar las referencias de los archivos hacia /assets/images, en nuestro caso de los recursos que se encuentran en el archivo Template.js
+
+Antes
+```bash
+          <a href="https://twitter.com/gndx">
+            <img src="../src/assets/images/twitter.png" />
+          </a>
+
+```
+
+Despues
+```bash
+          <a href="https://twitter.com/gndx">
+            <img src="assets/images/twitter.png" />
+          </a>
+
+```
+
+* Correr el comando en nuestra terminal 
+```bash
+npm run build
+```
