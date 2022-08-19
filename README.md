@@ -302,3 +302,27 @@ Despues
 ```bash
 npm run build
 ```
+
+## Loader de imágenes
+
+Añadir regla de module configuracion en webpack.config.js
+
+```bash
+        {
+            test: /\.png/,
+            type: 'asset/resource'
+        }
+```
+
+Realizar los import de las imágenes en el Template.js
+
+```bash
+import github from '../assets/images/github.png';
+```
+Utilizarlo de manera directa, se recomienda usar esta forma para que sea mas dinámico.
+
+```bash
+            <a href="https://github.com/gndx">
+            <img src="${github}" />
+          </a>
+```

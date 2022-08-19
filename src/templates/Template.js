@@ -1,4 +1,5 @@
 import getData from '../utils/getData.js';
+import github from '../assets/images/github.png';
 
 const Template = async () => {
   const data = await getData();
@@ -27,7 +28,7 @@ const Template = async () => {
             <img src="assets/images/twitter.png" />
           </a>
           <a href="https://github.com/gndx">
-            <img src="assets/images/github.png" />
+            <img src="${github}" />
           </a>
           <a href="https://instagram.com/gndx">
             <img src="assets/images/instagram.png" />
