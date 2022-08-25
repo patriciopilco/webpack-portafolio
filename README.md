@@ -527,3 +527,37 @@ const API = process.env.API;
 
 npm run build
 ```
+
+## Webpack Modo Desarrollo
+
+1. Crear un nuevo archivo de configuración *webpack.config.dev.js*
+2. Copiar los archivos de *webpack.config.js* sin la sección *optimization*
+3. Añadir la sección *mode: 'development',* de esta manera se configura de manera específica para modo desarrollo
+
+```bash
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        path: path.resolve(__dirname, 'dist'),      
+        filename: '[name].[contenthash].js',
+        assetModuleFilename: 'assets/images/[hash][ext][query]'   
+        imagenes
+    },
+    mode: 'development',  // Se añade para configuración modo desarrollo
+    
+```
+4. Configurar el archivo *package.json* en la sección scripts
+
+```bash
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "dev": "webpack --config webpack.config.dev.js"   // Se añade para configuración modo desarrollo
+  },
+```
+
+5. Ejecutar en la terminal el comando
+
+```bash
+npm run dev
+```
