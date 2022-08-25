@@ -480,5 +480,50 @@ import '../../../../'
 ```bash
 npm run build
 ```
+## Variables de entorno
 
+```bash
+npm install dotenv-webpack -D
+``` 
+Añadir la configuración 
 
+1. Crear archivo .env (Este directorio no se sube al repositorio por ende se debe solicitar estas variables al lider de equipo)
+```bash
+API=https://api.com
+```
+2. Crear archivo .env-example (Va tener los elementos ejemplo de que variables va tener el proyecto).
+```bash
+API=
+```
+3. Editar el archivo webpack.config.js
+
+```bash
+const Dotenv = require('dotenv-webpack');
+```
+
+4. Agregar nuevo plugin
+
+```bash
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, "src", "assets/images"),
+                    to: "assets/images"
+                }
+            ]
+        }),
+        new Dotenv(),   //Nuevo plugin
+    ],
+```
+
+5. Utilizar la variable 
+
+```bash
+const API = process.env.API;
+```
+6. Probar 
+
+```bash
+
+npm run build
+```
