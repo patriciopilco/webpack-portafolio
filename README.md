@@ -326,3 +326,122 @@ Utilizarlo de manera directa, se recomienda usar esta forma para que sea mas din
             <img src="${github}" />
           </a>
 ```
+
+
+## Loaders de fuentes
+
+* Optimizar llamado de fuentes para realizarlo de manera local.
+* Las fuentes se las puede descargar desde el sitio *google-webfonts-helper.herokuapp.com/fonts*
+
+1. Configurar en el archivo */src/styles/main.css*
+
+```bash
+#Quitar el import hacia una url
+
+@import "https://fonts.googleapis.com/css?family=Ubuntu:300,400,500";
+
+#Remplazar por la fuente de manera local
+
+@font-face {
+	font-family: 'Ubuntu';
+	src: url('../assets/fonts/ubuntu-regular.woff2') format('woff2'),
+		url('../assets/fonts/ubuntu-regular.woff') format('woff');
+	font-weight: 400;		
+	font-style: normal;
+}
+```
+
+2. Copiar de assets a la carpeta de dist
+
+* Instalar dos recursos que nos va permir leer archivos y moverlos.
+```bash
+npm install url-loader file-loader -D
+```
+
+3. Añadir regla dentro de module en *webpack.config.js*
+
+```bash
+        {
+            test:/\.(woff|woff2)$/,
+            use:{
+                loader: 'url-loader',
+                options: {
+                    limit: 10000,
+                    mimetype: "application/font-woff",
+                    name: "[name].[ext]",
+                    outputPath: "./assets/fonts/",
+                    publicPath: "./assets/fonts/",
+                    esModule: false
+                },
+            }
+        }
+
+```
+
+## Compresion y Minificación de archivos
+
+Instalar dependencias para minimizar el css y minimizar el javascript
+
+```bash
+npm install css-minimizer-webpack-plugin terser-webpack-plugin -D
+```
+
+Editar el archivo *webpack.config.js*
+* Añadir las constantes CssMinimizerPlugin, TerserPlugin
+```bash
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+```
+
+* Añadir la parte de optimizacion *optimization* para la optimizacion Css y javascript
+
+```bash
+optimization: {
+        minimize: true,
+        minimizer: [
+            new CssMinimizerPlugin(),
+            new TerserPlugin(),
+        ]
+    }
+```
+* Personalizar los filename 
+
+```bash
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        path: path.resolve(__dirname, 'dist'),      
+        filename: '[name].[contenthash].js',
+        assetModuleFilename: 'assets/images/[hash][ext][query]'   //Configuración para mover nuestras imagenes
+    }
+```
+  * Habilitar el formato hash para las fonts
+
+  ```bash
+ test:/\.(woff|woff2)$/,
+            use:{
+                loader: 'url-loader',
+                options: {
+                    limit: 10000,
+                    mimetype: "application/font-woff",
+                    name: "[name].[contenthash].[ext]",  //Se añade contenthash
+                    outputPath: "./assets/fonts/",
+                    publicPath: "./assets/fonts/",
+                    esModule: false
+                },
+
+  ```  
+* Configuración al MiniCssExtractPlugin
+
+```bash
+        new MiniCssExtractPlugin({
+            filename: 'assets/[name].[contenthash].css'
+        }),
+```
+
+* Probar los cambios
+```bash
+npm run build
+```
+
+
