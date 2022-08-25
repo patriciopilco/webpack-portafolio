@@ -13,7 +13,13 @@ module.exports = {
         assetModuleFilename: 'assets/images/[hash][ext][query]'   //Configuración para mover nuestras imagenes
     },
     resolve: {
-        extensions: ['.js']
+        extensions: ['.js'],
+        alias: {
+            '@utils': path.resolve(__dirname, 'src/utils'),
+            '@templates': path.resolve(__dirname, 'src/templates'),
+            '@styles': path.resolve(__dirname, 'src/styles'),
+            '@images': path.resolve(__dirname, 'src/images')
+        }
     },
     module: {
         rules: [
@@ -43,7 +49,7 @@ module.exports = {
                     mimetype: "application/font-woff",
                     name: "[name].[contenthash].[ext]",
                     outputPath: "./assets/fonts/",
-                    publicPath: "./assets/fonts/",
+                    publicPath: "../assets/fonts/",
                     esModule: false
                 },
             }

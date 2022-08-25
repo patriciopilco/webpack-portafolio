@@ -444,4 +444,41 @@ module.exports = {
 npm run build
 ```
 
+## Webpack Alias
+
+Es utilizado cuando se desconoce donde se encuentra ubicado nuestro recurso por ejemplo.
+
+```bash
+import '../../../../'
+```
+ Para poder ubicar este tipo de archivos utilizar alias
+
+ 1. configurar *webpack.config.js* en la sección resolve se debe crear un objeto alias.
+
+ ```bash
+  resolve: {
+        extensions: ['.js'],
+        alias: {
+            '@utils': path.resolve(__dirname, 'src/utils'),
+            '@templates': path.resolve(__dirname, 'src/templates'),
+            '@styles': path.resolve(__dirname, 'src/styles'),
+            '@images': path.resolve(__dirname, 'src/images')
+        }
+    },
+ ```
+
+ 2. Cambiar las rutas en los import del *index.js*
+
+ ```bash
+ import Template from '@templates/Template.js';
+ import '@styles/main.css';
+ import '@styles/vars.styl';
+ ```
+
+3. Probar la configuracion 
+
+```bash
+npm run build
+```
+
 
