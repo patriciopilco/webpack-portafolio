@@ -640,22 +640,21 @@ npm run dev
 
 2. Revisar el log del servidor 
 
-Instalar stylus
-npm install stylus -D
-
+* [Error al momento de cargar el directorio env]
 ```bash
 10:06:56 AM: Failed to load ./.env.
 ```
-Crear carpeta *scripts* en el proyecto
-Crear el archivo *create-env.js*
+[Solución]
+1. Crear carpeta *scripts* en el proyecto
+2. Crear el archivo *create-env.js*
 ```bash
 const fs = require ('fs');
 
 fs.writeFileSync('./.env', `API=${process.env.API}\n`);
 ```
-En netlify [deploy setting/ Build&deploy / Environment] crear una variable *API* y copiar el valor de la api
+3. En netlify [deploy setting/ Build&deploy / Environment] crear una variable *API* y copiar el valor de la api
 
-Ejecutar el recurso antes del build, para eso anidamos *node ./scripts/create-env.js*
+4. Ejecutar el recurso antes del build, para eso anidamos *node ./scripts/create-env.js*
 
 ```bash
  "scripts": {
@@ -664,3 +663,4 @@ Ejecutar el recurso antes del build, para eso anidamos *node ./scripts/create-en
     "dev": "webpack --config webpack.config.dev.js"
   },
 ```
+>> Ver proyecto desplegado en netlify - [https://webpack-portafoliojs.netlify.app/](https://webpack-portafoliojs.netlify.app/)
