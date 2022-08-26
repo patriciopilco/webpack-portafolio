@@ -561,3 +561,36 @@ module.exports = {
 ```bash
 npm run dev
 ```
+
+## Webpack Modo Producción
+
+1. Instalar plugin clean
+```bash
+npm install clean-webpack-plugin -D
+```
+2. Aplicar la configuración en *webpack.config.js*
+```bash
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+```
+3. Añadir plugin en las sección *plugins* en *webpack.config.js*
+
+```bash
+                }
+            ]
+        }),
+        new Dotenv(),
+        new CleanWebpackPlugin(),   //Se añade el plugin
+    ],
+```
+
+4. Completar el modo producción en el archivo *package.json*
+
+```bash
+"build": "webpack --mode production --config webpack.config.js",
+```
+
+5. Ejecutar en la consola 
+
+```bash
+npm run build
+```
