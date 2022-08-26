@@ -618,7 +618,7 @@ npm run dev
 
 ```
 
-1. (Segunta Forma) Editanto el archivo *package.json* y añadiendo un elemento en script
+2. (Segunta Forma) Editanto el archivo *package.json* y añadiendo un elemento en script
 
 ```bash
 "build:watch": "webpack --watch --config webpack.config.js"
@@ -628,3 +628,12 @@ npm run dev
  ```bash
  npm run build:watch
  ```
+## Deploy Netlify
+
+1. Crear el archivo *netlify.toml*
+
+```bash
+[build]
+    publish = "dist"
+    command = "npm run build"
+```
