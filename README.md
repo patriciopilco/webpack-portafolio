@@ -637,3 +637,30 @@ npm run dev
     publish = "dist"
     command = "npm run build"
 ```
+
+2. Revisar el log del servidor 
+
+Instalar stylus
+npm install stylus -D
+
+```bash
+10:06:56 AM: Failed to load ./.env.
+```
+Crear carpeta *scripts* en el proyecto
+Crear el archivo *create-env.js*
+```bash
+const fs = require ('fs');
+
+fs.writeFileSync('./.env', `API=${process.env.API}\n`);
+```
+En netlify [deploy setting/ Build&deploy / Environment] crear una variable *API* y copiar el valor de la api
+
+Ejecutar el recurso antes del build, para eso anidamos *node ./scripts/create-env.js*
+
+```bash
+ "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ./scripts/create-env.js && webpack --mode production --config webpack.config.js",
+    "dev": "webpack --config webpack.config.dev.js"
+  },
+```
