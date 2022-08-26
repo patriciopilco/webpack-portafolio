@@ -594,3 +594,37 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 ```bash
 npm run build
 ```
+
+## Webpack Watch
+Permite estar observando los cambios del proyecto y que se compilen de forma automática.
+
+1. (Primera Forma) Configuración *watch* en modo desarrollo *webpack.config.dev.js*
+
+```bash
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        path: path.resolve(__dirname, 'dist'),      
+        filename: '[name].[contenthash].js',
+        assetModuleFilename: 'assets/images/[hash][ext][query]'   
+    },
+    mode: 'development',
+    watch: true, // Esta linea se agrega para la configuracón en modo watch
+```
+ Ejecutar en consola
+
+```bash
+npm run dev
+
+```
+
+1. (Segunta Forma) Editanto el archivo *package.json* y añadiendo un elemento en script
+
+```bash
+"build:watch": "webpack --watch --config webpack.config.js"
+```
+ Ejecutar en consola
+
+ ```bash
+ npm run build:watch
+ ```

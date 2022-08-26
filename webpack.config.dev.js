@@ -14,6 +14,7 @@ module.exports = {
         assetModuleFilename: 'assets/images/[hash][ext][query]'   //Configuración para mover nuestras imagenes
     },
     mode: 'development',
+    watch: true,
     resolve: {
         extensions: ['.js'],
         alias: {
